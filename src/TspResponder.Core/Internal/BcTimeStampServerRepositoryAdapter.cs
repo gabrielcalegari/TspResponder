@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Org.BouncyCastle.Asn1;
@@ -8,7 +9,7 @@ using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509;
 
-namespace TspResponder.Internal
+namespace TspResponder.Core.Internal
 {
     /// <inheritdoc />
     internal class BcTimeStampResponderRepositoryAdapter : IBcTimeStampResponderRepository
@@ -46,6 +47,18 @@ namespace TspResponder.Internal
         {
             long serial = TimeStampResponderRepository.GetNextSerialNumber();
             return BigInteger.ValueOf(serial);
+        }
+
+        /// <inheritdoc />
+        public DateTime GetTimeToSign()
+        {
+            return TimeStampResponderRepository.GetTimeToSign();
+        }
+
+        /// <inheritdoc />
+        public Task SaveAuditLog(TimeStampAudit audit)
+        {
+            return TimeStampResponderRepository.SaveAuditLog(audit);
         }
 
         /// <see cref="TimeStampResponderRepository"/>

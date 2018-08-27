@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using TspResponder.Core;
 
 namespace TspResponder.App
 {
@@ -32,6 +33,16 @@ namespace TspResponder.App
         public long GetNextSerialNumber()
         {
             return DateTime.Now.Ticks;
+        }
+
+        public DateTime GetTimeToSign()
+        {
+            return DateTime.UtcNow;
+        }
+
+        public Task SaveAuditLog(TimeStampAudit audit)
+        {
+            return Task.CompletedTask;
         }
 
         private static byte[] _certificate;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace TspResponder.Internal
+namespace TspResponder.Core.Internal
 {
     /// <summary>
     /// Custom exception

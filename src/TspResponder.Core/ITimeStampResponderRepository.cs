@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
-namespace TspResponder
+namespace TspResponder.Core
 {
     /// <summary>
     /// Contract that a TSP Responder uses to stamp datum
@@ -39,5 +40,17 @@ namespace TspResponder
         /// </summary>
         /// <returns>A <see cref="long"/> that represents the serial number for the stamping</returns>
         long GetNextSerialNumber();
+
+        /// <summary>
+        /// Gets the time to sign the datum
+        /// </summary>
+        /// <returns>A <see cref="DateTime"/> that represents the time to sign the datum</returns>
+        DateTime GetTimeToSign();
+
+        /// <summary>
+        /// Saves an audit register for signed datum
+        /// </summary>
+        /// <param name="audit">A <see cref="TimeStampAudit"/></param>
+        Task SaveAuditLog(TimeStampAudit audit);
     }
 }

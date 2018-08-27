@@ -1,4 +1,4 @@
-﻿namespace TspResponder.Http
+﻿namespace TspResponder.Core.Http
 {
     public class TspHttpRequest
     {

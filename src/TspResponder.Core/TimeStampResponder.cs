@@ -8,11 +8,12 @@ using Org.BouncyCastle.Asn1.Nist;
 using Org.BouncyCastle.Asn1.TeleTrust;
 using Org.BouncyCastle.Asn1.Tsp;
 using Org.BouncyCastle.Tsp;
-using TspResponder.Http;
-using TspResponder.Internal;
-using TspException = TspResponder.Internal.TspException;
+using Org.BouncyCastle.X509;
+using TspResponder.Core.Http;
+using TspResponder.Core.Internal;
+using TspException = TspResponder.Core.Internal.TspException;
 
-namespace TspResponder
+namespace TspResponder.Core
 {
     /// <summary>
     /// Implementation of a TSP responder as defined in RFC 3161
@@ -36,7 +37,7 @@ namespace TspResponder
             catch (Exception e)
             {
                 var pkiStatus = new PkiStatusInfo(
-                    (int)PkiStatus.Rejection,
+                    (int) PkiStatus.Rejection,
                     new PkiFreeText(new DerUtf8String("An internal error ocurred.")),
                     new PkiFailureInfo(PkiFailureInfo.SystemFailure));
 
@@ -51,9 +52,11 @@ namespace TspResponder
         /// <returns><see cref="ContentInfo"/></returns>
         private async Task<ContentInfo> GetTimeStampToken(TimeStampRequest timeStampRequest)
         {
+            var tsaCertificate = await BcTimeStampResponderRepository.GetCertificate();
+
             var tokenGenerator = new TimeStampTokenGenerator(
                 await BcTimeStampResponderRepository.GetPrivateKey(),
-                await BcTimeStampResponderRepository.GetCertificate(),
+                tsaCertificate,
                 NistObjectIdentifiers.IdSha512.Id,
                 BcTimeStampResponderRepository.GetPolicyOid()
                 );
@@ -61,13 +64,15 @@ namespace TspResponder
             var timeStampToken = tokenGenerator.Generate(
                 timeStampRequest,
                 BcTimeStampResponderRepository.GetNextSerialNumber(),
-                DateTime.UtcNow);
-
+                BcTimeStampResponderRepository.GetTimeToSign());
+            
             try
             {
                 using (var stream = new Asn1InputStream(timeStampToken.ToCmsSignedData().GetEncoded()))
                 {
-                    return ContentInfo.GetInstance(stream.ReadObject());
+                    var contentInfo = ContentInfo.GetInstance(stream.ReadObject());
+                    await SaveAuditLog(timeStampRequest, timeStampToken, tsaCertificate);
+                    return contentInfo;
                 }
             }
             catch (Exception e)
@@ -77,7 +82,29 @@ namespace TspResponder
         }
 
         /// <summary>
-        /// Retrives the <see cref="TimeStampRequest"/> from the <see cref="TspHttpRequest"/>
+        /// Saves an audit register of the operation
+        /// </summary>
+        /// <param name="timeStampRequest"><see cref="TimeStampRequest"/></param>
+        /// <param name="timeStampToken"><see cref="TimeStampToken"/></param>
+        /// <param name="tsaCertificate"><see cref="X509Certificate"/></param>
+        /// <returns></returns>
+        private Task SaveAuditLog(TimeStampRequest timeStampRequest, TimeStampToken timeStampToken, X509Certificate tsaCertificate)
+        {
+            var audit = new TimeStampAudit
+            {
+                HashAlgorithm = timeStampRequest.MessageImprintAlgOid,
+                HashMessage = timeStampRequest.GetMessageImprintDigest(),
+                Policy = timeStampRequest.ReqPolicy,
+                Serial = timeStampToken.TimeStampInfo.SerialNumber.ToString(),
+                SignedTime = timeStampToken.TimeStampInfo.GenTime,
+                TsaSerial = tsaCertificate.SerialNumber.ToString()
+            };
+
+            return BcTimeStampResponderRepository.SaveAuditLog(audit);
+        }
+
+        /// <summary>
+        /// Retrieves the <see cref="TimeStampRequest"/> from the <see cref="TspHttpRequest"/>
         /// </summary>
         /// <param name="tspHttpRequest"><see cref="TspHttpRequest"/></param>
         /// <returns><see cref="TspReqResult"/> containing the <see cref="TimeStampRequest"/> and the <see cref="PkiStatusInfo"/></returns>

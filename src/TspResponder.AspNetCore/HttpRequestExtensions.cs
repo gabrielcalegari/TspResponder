@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using TspResponder.Http;
+using TspResponder.Core.Http;
 
 namespace TspResponder.AspNetCore
 {

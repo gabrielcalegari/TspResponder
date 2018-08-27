@@ -2,7 +2,7 @@
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.Tsp;
 
-namespace TspResponder.Internal
+namespace TspResponder.Core.Internal
 {
     internal class TspReqResult
     {

@@ -4,7 +4,7 @@ using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Nist;
 using Org.BouncyCastle.Asn1.TeleTrust;
 
-namespace TspResponder.Internal
+namespace TspResponder.Core.Internal
 {
     /// <summary>
     /// Utilities for Tsp Algorithms

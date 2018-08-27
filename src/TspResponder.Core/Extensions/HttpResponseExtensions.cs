@@ -1,8 +1,8 @@
 ﻿using System.Net;
 using System.Net.Http;
-using TspResponder.Http;
+using TspResponder.Core.Http;
 
-namespace TspResponder.Extensions
+namespace TspResponder.Core.Extensions
 {
     /// <summary>
     /// Extension methods for <see cref="TspHttpResponse"/>

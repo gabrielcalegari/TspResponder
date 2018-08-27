@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Math;
 using Org.BouncyCastle.X509;
 
-namespace TspResponder.Internal
+namespace TspResponder.Core.Internal
 {
     /// <summary>
     /// Adapter from <see cref="ITimeStampResponderRepository"/> for BouncyCastle's library
@@ -21,5 +22,9 @@ namespace TspResponder.Internal
         string GetPolicyOid();
 
         BigInteger GetNextSerialNumber();
+
+        DateTime GetTimeToSign();
+
+        Task SaveAuditLog(TimeStampAudit audit);
     }
 }

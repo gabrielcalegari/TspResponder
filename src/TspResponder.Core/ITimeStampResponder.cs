@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using TspResponder.Http;
+using TspResponder.Core.Http;
 
-namespace TspResponder
+namespace TspResponder.Core
 {
     public interface ITimeStampResponder
     {

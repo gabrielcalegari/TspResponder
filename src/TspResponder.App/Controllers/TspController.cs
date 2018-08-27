@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using TspResponder.AspNetCore;
+using TspResponder.Core;
 
 namespace TspResponder.App.Controllers
 {
