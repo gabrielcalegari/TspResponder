@@ -2,6 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <Version>1.0.0-rc</Version>
+    <PackageLicenseUrl>https://github.com/gabrielcalegari/TspResponder/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/gabrielcalegari/TspResponder</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/gabrielcalegari/TspResponder</RepositoryUrl>
+    <PackageTags>timestamp tsa</PackageTags>
+    <Description>A .NET facility to create a Timestamp Authority Responder</Description>
+    <Copyright>Gabriel Calegari</Copyright>
   </PropertyGroup>
 
   <ItemGroup>

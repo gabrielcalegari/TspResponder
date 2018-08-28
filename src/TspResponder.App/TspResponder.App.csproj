@@ -19,10 +19,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\TspResponder.AspNetCore\TspResponder.AspNetCore.csproj" />
+    <PackageReference Include="TspResponder.AspNetCore" Version="1.0.0-rc" />
   </ItemGroup>
 
 </Project>
