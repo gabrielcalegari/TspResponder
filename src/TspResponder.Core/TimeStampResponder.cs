@@ -94,7 +94,7 @@ namespace TspResponder.Core
             {
                 HashAlgorithm = timeStampRequest.MessageImprintAlgOid,
                 HashMessage = timeStampRequest.GetMessageImprintDigest(),
-                Policy = timeStampRequest.ReqPolicy,
+                Policy = BcTimeStampResponderRepository.GetPolicyOid(),
                 Serial = timeStampToken.TimeStampInfo.SerialNumber.ToString(),
                 SignedTime = timeStampToken.TimeStampInfo.GenTime,
                 TsaSerial = tsaCertificate.SerialNumber.ToString()
