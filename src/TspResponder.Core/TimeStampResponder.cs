@@ -7,6 +7,7 @@ using Org.BouncyCastle.Asn1.Cms;
 using Org.BouncyCastle.Asn1.Nist;
 using Org.BouncyCastle.Asn1.TeleTrust;
 using Org.BouncyCastle.Asn1.Tsp;
+using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Tsp;
 using Org.BouncyCastle.X509;
 using TspResponder.Core.Http;
@@ -60,6 +61,8 @@ namespace TspResponder.Core
                 NistObjectIdentifiers.IdSha512.Id,
                 BcTimeStampResponderRepository.GetPolicyOid()
                 );
+
+            tokenGenerator.SetTsa(new GeneralName(new X509Name(tsaCertificate.SubjectDN.ToString())));
 
             var timeStampToken = tokenGenerator.Generate(
                 timeStampRequest,
