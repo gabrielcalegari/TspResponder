@@ -23,6 +23,7 @@ namespace TspResponder.App
 
             services.AddScoped<ITimeStampResponder, TimeStampResponder>();
             services.AddScoped<ITimeStampResponderRepository, TimeStampResponderRepository>();
+            services.AddScoped<ITimeStampLogger, TimeStampLogger>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

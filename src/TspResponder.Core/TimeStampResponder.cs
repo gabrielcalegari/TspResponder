@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Org.BouncyCastle.Asn1;
@@ -10,6 +11,7 @@ using Org.BouncyCastle.Asn1.Tsp;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Tsp;
 using Org.BouncyCastle.X509;
+using Org.BouncyCastle.X509.Store;
 using TspResponder.Core.Http;
 using TspResponder.Core.Internal;
 using TspException = TspResponder.Core.Internal.TspException;
@@ -37,6 +39,8 @@ namespace TspResponder.Core
             }
             catch (Exception e)
             {
+                TimeStampLogger.Error(e.Message);
+
                 var pkiStatus = new PkiStatusInfo(
                     (int) PkiStatus.Rejection,
                     new PkiFreeText(new DerUtf8String("An internal error ocurred.")),
@@ -61,6 +65,12 @@ namespace TspResponder.Core
                 NistObjectIdentifiers.IdSha512.Id,
                 BcTimeStampResponderRepository.GetPolicyOid()
                 );
+
+            var certs = X509StoreFactory.Create("Certificate/Collection",
+                new X509CollectionStoreParameters(
+                    new List<X509Certificate> { tsaCertificate }));
+
+            tokenGenerator.SetCertificates(certs);
 
             tokenGenerator.SetTsa(new GeneralName(new X509Name(tsaCertificate.SubjectDN.ToString())));
 
@@ -245,9 +255,13 @@ namespace TspResponder.Core
         /// <inheritdoc cref="IBcTimeStampResponderRepository"/>
         private IBcTimeStampResponderRepository BcTimeStampResponderRepository { get; }
 
-        public TimeStampResponder(ITimeStampResponderRepository timeStampResponderRepository)
+        /// <inheritdoc cref="ITimeStampLogger"/>
+        private ITimeStampLogger TimeStampLogger { get; }
+
+        public TimeStampResponder(ITimeStampResponderRepository timeStampResponderRepository, ITimeStampLogger timeStampLogger)
         {
             BcTimeStampResponderRepository = new BcTimeStampResponderRepositoryAdapter(timeStampResponderRepository);
+            TimeStampLogger = timeStampLogger;
         }
     }
 }

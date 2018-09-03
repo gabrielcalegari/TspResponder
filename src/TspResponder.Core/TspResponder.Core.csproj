@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <Version>1.0.0-rc3</Version>
+    <Version>1.0.0-rc4</Version>
     <PackageLicenseUrl>https://github.com/gabrielcalegari/TspResponder/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/gabrielcalegari/TspResponder</PackageProjectUrl>
     <RepositoryUrl>https://github.com/gabrielcalegari/TspResponder</RepositoryUrl>
