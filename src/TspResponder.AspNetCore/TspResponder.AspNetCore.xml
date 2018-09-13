@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TspResponder.AspNetCore</name>
+    </assembly>
+    <members>
+        <member name="T:TspResponder.AspNetCore.HttpRequestExtensions">
+            <summary>
+            Set of extension methods for <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/>
+            </summary>
+        </member>
+        <member name="M:TspResponder.AspNetCore.HttpRequestExtensions.ToTspHttpRequest(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Converts <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/> to <see cref="T:TspResponder.Core.Http.TspHttpRequest"/>
+            </summary>
+            <param name="request"><see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/></param>
+            <returns><see cref="T:TspResponder.Core.Http.TspHttpRequest"/></returns>
+        </member>
+        <member name="M:TspResponder.AspNetCore.HttpRequestExtensions.GetRawBodyBytesAsync(Microsoft.AspNetCore.Http.HttpRequest)">
+            <summary>
+            Retrieves the raw body as a byte array from the Request.Body stream
+            </summary>
+            <param name="request">The <see cref="T:Microsoft.AspNetCore.Http.HttpRequest"/></param>
+            <returns></returns>
+        </member>
+        <member name="T:TspResponder.AspNetCore.TspActionResult">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.AspNetCore.TspActionResult.ExecuteResultAsync(Microsoft.AspNetCore.Mvc.ActionContext)">
+            <inheritdoc />
+        </member>
+        <member name="P:TspResponder.AspNetCore.TspActionResult.TspHttpResponse">
+            <summary>
+            A <see cref="P:TspResponder.AspNetCore.TspActionResult.TspHttpResponse"/> from TspResponder
+            </summary>
+        </member>
+        <member name="M:TspResponder.AspNetCore.TspActionResult.#ctor(TspResponder.Core.Http.TspHttpResponse)">
+            <summary>
+            Creates a <see cref="T:Microsoft.AspNetCore.Mvc.IActionResult"/> for Timestamp responses
+            </summary>
+            <param name="tspHttpResponse"><see cref="P:TspResponder.AspNetCore.TspActionResult.TspHttpResponse"/></param>
+        </member>
+    </members>
+</doc>

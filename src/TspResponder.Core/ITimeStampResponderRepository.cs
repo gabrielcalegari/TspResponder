@@ -9,7 +9,7 @@ namespace TspResponder.Core
     /// <summary>
     /// Contract that a TSP Responder uses to stamp datum
     /// </summary>
-    public interface ITimeStampResponderRepository
+    public interface ITimeStampResponderRepository: IDisposable
     {
         /// <summary>
         /// Gets the public key certificate of the TSA

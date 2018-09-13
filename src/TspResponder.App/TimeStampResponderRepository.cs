@@ -56,7 +56,7 @@ namespace TspResponder.App
                     _certificate = GetFromFile();
                 }
                 
-                return new X509Certificate2(_certificate, "12", X509KeyStorageFlags.Exportable | X509KeyStorageFlags.PersistKeySet);
+                return new X509Certificate2(_certificate, "12", X509KeyStorageFlags.Exportable | X509KeyStorageFlags.MachineKeySet);
             }
         }
 
@@ -70,6 +70,22 @@ namespace TspResponder.App
 
                 return bytes;
             }
+        }
+
+        private void ReleaseUnmanagedResources()
+        {
+            Certificate.Dispose();
+        }
+
+        public void Dispose()
+        {
+            ReleaseUnmanagedResources();
+            GC.SuppressFinalize(this);
+        }
+
+        ~TimeStampResponderRepository()
+        {
+            ReleaseUnmanagedResources();
         }
     }
 }

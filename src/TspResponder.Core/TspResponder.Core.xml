@@ -1,0 +1,238 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TspResponder.Core</name>
+    </assembly>
+    <members>
+        <member name="T:TspResponder.Core.Extensions.HttpRequestExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Net.Http.HttpRequestMessage"/>
+            </summary>
+        </member>
+        <member name="M:TspResponder.Core.Extensions.HttpRequestExtensions.ToTspHttpRequest(System.Net.Http.HttpRequestMessage)">
+            <summary>
+            Converts the <see cref="T:System.Net.Http.HttpRequestMessage"/> to <see cref="T:TspResponder.Core.Http.TspHttpRequest"/>
+            </summary>
+            <param name="requestMessage"><see cref="T:System.Net.Http.HttpRequestMessage"/></param>
+            <returns><see cref="T:TspResponder.Core.Http.TspHttpRequest"/></returns>
+        </member>
+        <member name="T:TspResponder.Core.Extensions.HttpResponseExtensions">
+            <summary>
+            Extension methods for <see cref="T:TspResponder.Core.Http.TspHttpResponse"/>
+            </summary>
+        </member>
+        <member name="M:TspResponder.Core.Extensions.HttpResponseExtensions.ToHttpResponseMessage(TspResponder.Core.Http.TspHttpResponse)">
+            <summary>
+            Converts the <see cref="T:TspResponder.Core.Http.TspHttpResponse"/> to <see cref="T:System.Net.Http.HttpResponseMessage"/>
+            </summary>
+            <param name="tspHttpResponse"><see cref="T:TspResponder.Core.Http.TspHttpResponse"/></param>
+            <returns><see cref="T:System.Net.Http.HttpResponseMessage"/></returns>
+        </member>
+        <member name="T:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.GetCertificate">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.GetPrivateKey">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.GetAcceptedExtensions">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.GetPolicyOid">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.GetNextSerialNumber">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.GetTimeToSign">
+            <inheritdoc />
+        </member>
+        <member name="M:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.SaveAuditLog(TspResponder.Core.TimeStampAudit)">
+            <inheritdoc />
+        </member>
+        <member name="P:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.TimeStampResponderRepository">
+            <see cref="P:TspResponder.Core.Internal.BcTimeStampResponderRepositoryAdapter.TimeStampResponderRepository"/>
+        </member>
+        <member name="T:TspResponder.Core.Internal.IBcTimeStampResponderRepository">
+            <summary>
+            Adapter from <see cref="T:TspResponder.Core.ITimeStampResponderRepository"/> for BouncyCastle's library
+            </summary>
+        </member>
+        <member name="T:TspResponder.Core.Internal.TspAlgorithmUtil">
+            <summary>
+            Utilities for Tsp Algorithms
+            </summary>
+        </member>
+        <member name="M:TspResponder.Core.Internal.TspAlgorithmUtil.GetDigestLength(Org.BouncyCastle.Asn1.DerObjectIdentifier)">
+            <summary>
+            Gets the digest length of the specified hash algorithm
+            </summary>
+            <param name="algorithm">hash algorithm object identifier</param>
+            <returns>an <see cref="T:System.Int32"/> that represents the digest length</returns>
+        </member>
+        <member name="P:TspResponder.Core.Internal.TspAlgorithmUtil.DigestLengths">
+            <summary>
+            Digest Lenghts for each hash algorithm
+            </summary>
+        </member>
+        <member name="T:TspResponder.Core.Internal.TspException">
+            <summary>
+            Custom exception
+            </summary>
+        </member>
+        <member name="T:TspResponder.Core.ITimeStampResponderRepository">
+            <summary>
+            Contract that a TSP Responder uses to stamp datum
+            </summary>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampResponderRepository.GetCertificate">
+            <summary>
+            Gets the public key certificate of the TSA
+            </summary>
+            <returns>A <see cref="T:System.Security.Cryptography.X509Certificates.X509Certificate2"/></returns>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampResponderRepository.GetPrivateKey">
+            <summary>
+            Gets the private key of the TSA
+            </summary>
+            <returns>A <see cref="T:System.Security.Cryptography.AsymmetricAlgorithm"/> that represents the private key of the TSA</returns>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampResponderRepository.GetAcceptedExtensions">
+            <summary>
+            Gets the accepted extensions of the TSA
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampResponderRepository.GetPolicyOid">
+            <summary>
+            Gets the policy object identifier of the TSA
+            </summary>
+            <returns>policy object identifier</returns>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampResponderRepository.GetNextSerialNumber">
+            <summary>
+            Gets the next serial number for the stamping
+            </summary>
+            <returns>A <see cref="T:System.Int64"/> that represents the serial number for the stamping</returns>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampResponderRepository.GetTimeToSign">
+            <summary>
+            Gets the time to sign the datum
+            </summary>
+            <returns>A <see cref="T:System.DateTime"/> that represents the time to sign the datum</returns>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampResponderRepository.SaveAuditLog(TspResponder.Core.TimeStampAudit)">
+            <summary>
+            Saves an audit register for signed datum
+            </summary>
+            <param name="audit">A <see cref="T:TspResponder.Core.TimeStampAudit"/></param>
+        </member>
+        <member name="T:TspResponder.Core.ITimeStampLogger">
+            <summary>
+            A simple logging for the <see cref="T:TspResponder.Core.ITimeStampResponder"/>
+            </summary>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampLogger.Debug(System.String)">
+            <summary>
+            Log a message for Debug level
+            </summary>
+            <param name="message">message</param>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampLogger.Warn(System.String)">
+            <summary>
+            Log a message for Warn level
+            </summary>
+            <param name="message">message</param>
+        </member>
+        <member name="M:TspResponder.Core.ITimeStampLogger.Error(System.String)">
+            <summary>
+            Log a message for Error level
+            </summary>
+            <param name="message"></param>
+        </member>
+        <member name="T:TspResponder.Core.TimeStampAudit">
+            <summary>
+            Audit register
+            </summary>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampAudit.HashAlgorithm">
+            <summary>
+            Digest algorithm for the request datum
+            </summary>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampAudit.HashMessage">
+            <summary>
+            Digest message to be asigned time
+            </summary>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampAudit.Policy">
+            <summary>
+            Tsa policy under what the token was generated
+            </summary>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampAudit.TsaSerial">
+            <summary>
+            Certificate serial used to sign time
+            </summary>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampAudit.Serial">
+            <summary>
+            Serial token of the signing
+            </summary>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampAudit.SignedTime">
+            <summary>
+            Time asigned to the datum
+            </summary>
+        </member>
+        <member name="T:TspResponder.Core.TimeStampResponder">
+            <summary>
+            Implementation of a TSP responder as defined in RFC 3161
+            <remarks>https://www.ietf.org/rfc/rfc3161.txt</remarks>
+            </summary>
+        </member>
+        <member name="M:TspResponder.Core.TimeStampResponder.GetTimeStampToken(Org.BouncyCastle.Tsp.TimeStampRequest)">
+            <summary>
+            Gets the <see cref="T:Org.BouncyCastle.Asn1.Cms.ContentInfo"/> meaning the time stamp token
+            </summary>
+            <param name="timeStampRequest"><see cref="T:Org.BouncyCastle.Tsp.TimeStampRequest"/></param>
+            <returns><see cref="T:Org.BouncyCastle.Asn1.Cms.ContentInfo"/></returns>
+        </member>
+        <member name="M:TspResponder.Core.TimeStampResponder.SaveAuditLog(Org.BouncyCastle.Tsp.TimeStampRequest,Org.BouncyCastle.Tsp.TimeStampToken,Org.BouncyCastle.X509.X509Certificate)">
+            <summary>
+            Saves an audit register of the operation
+            </summary>
+            <param name="timeStampRequest"><see cref="T:Org.BouncyCastle.Tsp.TimeStampRequest"/></param>
+            <param name="timeStampToken"><see cref="T:Org.BouncyCastle.Tsp.TimeStampToken"/></param>
+            <param name="tsaCertificate"><see cref="T:Org.BouncyCastle.X509.X509Certificate"/></param>
+            <returns></returns>
+        </member>
+        <member name="M:TspResponder.Core.TimeStampResponder.GetTimeStampRequest(TspResponder.Core.Http.TspHttpRequest)">
+            <summary>
+            Retrieves the <see cref="T:Org.BouncyCastle.Tsp.TimeStampRequest"/> from the <see cref="T:TspResponder.Core.Http.TspHttpRequest"/>
+            </summary>
+            <param name="tspHttpRequest"><see cref="T:TspResponder.Core.Http.TspHttpRequest"/></param>
+            <returns><see cref="T:TspResponder.Core.Internal.TspReqResult"/> containing the <see cref="T:Org.BouncyCastle.Tsp.TimeStampRequest"/> and the <see cref="T:Org.BouncyCastle.Asn1.Cmp.PkiStatusInfo"/></returns>
+        </member>
+        <member name="M:TspResponder.Core.TimeStampResponder.CreateResponse(System.Byte[])">
+            <summary>
+            Creates a <see cref="T:TspResponder.Core.Http.TspHttpResponse"/> including the tsp response as byte array
+            </summary>
+            <param name="tspResponseBytes">tsp response as byte array</param>
+            <returns><see cref="T:TspResponder.Core.Http.TspHttpResponse"/></returns>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampResponder.AcceptedAlgorithms">
+            <summary>
+            Hash algorithms for TSP that are currently safe 4
+            </summary>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampResponder.BcTimeStampResponderRepository">
+            <inheritdoc cref="T:TspResponder.Core.Internal.IBcTimeStampResponderRepository"/>
+        </member>
+        <member name="P:TspResponder.Core.TimeStampResponder.TimeStampLogger">
+            <inheritdoc cref="T:TspResponder.Core.ITimeStampLogger"/>
+        </member>
+    </members>
+</doc>
