@@ -7,7 +7,7 @@ A .NET facility to create a Timestamp Authority Responder
 
 ## What is this?
 
-TspResponder is a library written in C# that enables you to easily create an Time Stamp Authority Responder in .NET. All you need is to implement an interface for the TSA Responder. It follows the TSP protocol defined in [RFC 3161](https://tools.ietf.org/html/rfc3161).
+TspResponder is a library written in C# that enables you to easily create a Time Stamp Authority Responder in .NET. All you need is to implement an interface for the TSA Responder. It follows the TSP protocol defined in [RFC 3161](https://tools.ietf.org/html/rfc3161).
 
 ## License
 
